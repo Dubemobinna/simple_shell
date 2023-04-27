@@ -48,42 +48,4 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	if (new_size < old_size)
 		_memcpy(newp, ptr, new_size);
-	else
-		_memcpy(newp, ptr, old_size);
 
-	free(ptr);
-	return (newp);
-}
-
-/**
- * _reallocdp - reallocates a memory block.
- * @ptr: memory formerly allocated.
- * @old_size: allocated space of ptr, size in byte.
- * @new_size: new memory size in byte.
- *
- * Return: ptr.
- * for new_size == old_size, returns ptr with no changes.
- * if malloc fails, returns NULL.
- */
-char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size)
-{
-	char **newp;
-	unsigned int i;
-
-	if (ptr == NULL)
-		return (malloc(sizeof(char *) * new_size));
-
-	if (new_size == old_size)
-		return (ptr);
-
-	newp = malloc(sizeof(char *) * new_size);
-	if (newp == NULL)
-		return (NULL);
-
-	for (i = 0; i < old_size; i++)
-		newp[i] = ptr[i];
-
-	free(ptr);
-
-	return (newp);
-}
